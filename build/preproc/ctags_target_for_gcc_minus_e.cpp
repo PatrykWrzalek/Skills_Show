@@ -1,28 +1,38 @@
-# 1 "c:\\Users\\Patryk\\Desktop\\App\\Arduino XH-Conector_Tester\\sketch.ino"
+# 1 "c:\\Users\\Patryk\\Desktop\\App\\Arduino XH-Conector_Tester\\StreetLight.ino"
+/*#define GHz 1000000000
 
+#define MHz 1000000
 
-int LED_PIN[8];
+#define kHz 1000*/
+//uint32_t MCU_Freguancy = 16 * MHz; //Max MCU_Freguancy 4 294 967 296 Hz
+uint8_t LightPin[3];
 
 void setup()
 {
-    for(int i=0; i<8; i++)
+    pinMode(13, 0x1);
+    for (uint8_t i = 0; i < 3; i++)
     {
-        LED_PIN[i]=i;
-        pinMode(LED_PIN[i], 0x0);
+        LightPin[i]=i;
+        pinMode(LightPin[i], 0x1);
+        //digitalWrite(LightPin[i], LOW);
     }
 }
 
 void loop()
 {
-    digitalWrite(LED_PIN[1], 0x1);
-    delay(5000);
-    digitalWrite(LED_PIN[1], 0x0);
-    digitalWrite(LED_PIN[2], 0x1);
-    delay(5000);
-    digitalWrite(LED_PIN[2], 0x0);
-    digitalWrite(LED_PIN[3], 0x1);
-    delay(5000);
-    digitalWrite(LED_PIN[3], 0x0);
-    digitalWrite(LED_PIN[4], 0x1);
-    delay(5000);
+    digitalWrite(LightPin[2], 0x1);
+    digitalWrite(LightPin[1], 0x0);
+    digitalWrite(LightPin[0], 0x0);
+    digitalWrite(13, 0x0);
+    delay(1000);
+    digitalWrite(LightPin[2], 0x0);
+    digitalWrite(LightPin[1], 0x1);
+    digitalWrite(LightPin[0], 0x0);
+    digitalWrite(13, 0x1);
+    delay(1000);
+    digitalWrite(LightPin[2], 0x0);
+    digitalWrite(LightPin[1], 0x0);
+    digitalWrite(LightPin[0], 0x1);
+    digitalWrite(13, 0x0);
+    delay(1000);
 }
