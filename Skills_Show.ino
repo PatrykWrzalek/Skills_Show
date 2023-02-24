@@ -133,15 +133,59 @@ void window_alarm()
 }
 ////////////////////////////////////////////////////////////////////
 ////*Flashing application depending on the potentiometer turning*///
-
+void voltage_mesure_init()
+{
+    UART_init();
+    for (uint8_t i = 0; i < LightNumber; i++)
+    {
+        LightPin[i] = i + LightStartsFromPin;
+        pinMode(LightPin[i], OUTPUT);
+        digitalWrite(LightPin[i], LOW);
+    }
+}
+void voltage_mesure()
+{
+    float voltage_mesure = 0.0;
+    voltage_mesure = analogRead(A5) * 5.0 / 1023.0;
+    Serial.println(String(voltage_mesure) + " V");
+    digitalWrite(LightStartsFromPin, HIGH);
+    delay(int(voltage_mesure * 200));
+    digitalWrite(LightStartsFromPin, LOW);
+    delay(int(voltage_mesure * 200));
+}
+void battery_status_LED_ladder()
+{
+    uint16_t mesure_data = 0, scale_value = 0;
+    mesure_data = analogRead(A5);
+    scale_value = map(mesure_data, 0, 1023, 1, (LightNumber + 1));
+    switch (scale_value)
+    {
+    case 1:
+        digitalWrite(LightPin[0], LOW);
+        break;
+    case 2:
+        digitalWrite(LightPin[0], HIGH);
+        digitalWrite(LightPin[1], LOW);
+        break;
+    case 3:
+        digitalWrite(LightPin[1], HIGH);
+        digitalWrite(LightPin[2], LOW);
+        break;
+    case 4:
+        digitalWrite(LightPin[2], HIGH);
+        break;
+    default:
+        break;
+    }
+}
 ////////////////////////////////////////////////////////////////////
 
 void setup()
 {
-    window_alarm_init();
+    voltage_mesure_init();
 }
 
 void loop()
 {
-    window_alarm();
+    battery_status_LED_ladder();
 }

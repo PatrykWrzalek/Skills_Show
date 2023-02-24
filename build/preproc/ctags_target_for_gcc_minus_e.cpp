@@ -1,4 +1,4 @@
-# 1 "c:\\Users\\Patryk\\Desktop\\App\\Arduino XH-Conector_Tester\\StreetLight.ino"
+# 1 "c:\\Users\\Patryk\\Desktop\\App\\Arduino XH-Conector_Tester\\Skills_Show.ino"
 /*Some of this projects are not finished,*/
 /*  but in short future it will be :D    */
 
@@ -134,15 +134,59 @@ void window_alarm()
 }
 ////////////////////////////////////////////////////////////////////
 ////*Flashing application depending on the potentiometer turning*///
-
+void voltage_mesure_init()
+{
+    UART_init();
+    for (uint8_t i = 0; i < 3; i++)
+    {
+        LightPin[i] = i + 5;
+        pinMode(LightPin[i], 0x1);
+        digitalWrite(LightPin[i], 0x0);
+    }
+}
+void voltage_mesure()
+{
+    float voltage_mesure = 0.0;
+    voltage_mesure = analogRead(A5) * 5.0 / 1023.0;
+    Serial.println(String(voltage_mesure) + " V");
+    digitalWrite(5, 0x1);
+    delay(int(voltage_mesure * 200));
+    digitalWrite(5, 0x0);
+    delay(int(voltage_mesure * 200));
+}
+void battery_status_LED_ladder()
+{
+    uint16_t mesure_data = 0, scale_value = 0;
+    mesure_data = analogRead(A5);
+    scale_value = map(mesure_data, 0, 1023, 1, (3 + 1));
+    switch (scale_value)
+    {
+    case 1:
+        digitalWrite(LightPin[0], 0x0);
+        break;
+    case 2:
+        digitalWrite(LightPin[0], 0x1);
+        digitalWrite(LightPin[1], 0x0);
+        break;
+    case 3:
+        digitalWrite(LightPin[1], 0x1);
+        digitalWrite(LightPin[2], 0x0);
+        break;
+    case 4:
+        digitalWrite(LightPin[2], 0x1);
+        break;
+    default:
+        break;
+    }
+}
 ////////////////////////////////////////////////////////////////////
 
 void setup()
 {
-    window_alarm_init();
+    voltage_mesure_init();
 }
 
 void loop()
 {
-    window_alarm();
+    battery_status_LED_ladder();
 }

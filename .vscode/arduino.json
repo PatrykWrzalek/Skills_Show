@@ -1,5 +1,5 @@
 {
-    "sketch": "StreetLight.ino",
+    "sketch": "Skills_Show.ino",
     "output": "build",
     "board": "arduino:avr:uno",
     "port": "COM5"
