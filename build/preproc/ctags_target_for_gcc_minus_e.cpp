@@ -1,4 +1,4 @@
-# 1 "c:\\Users\\Patryk\\Desktop\\App\\Arduino XH-Conector_Tester\\Skills_Show.ino"
+# 1 "c:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino"
 /*Some of this projects are not finished,*/
 /*  but in short future it will be :D    */
 
@@ -181,27 +181,40 @@ void battery_status_LED_ladder()
 
 /////////////////////////////WORKING_PROJECTS////////////////////////////////////
 ///*Light which turn on when it's come night (with potentiometer calibration)*///
-void NightLight_App()
+uint8_t prev_state = 0, curr_state = 0;
+void NightLight_App(uint8_t *prev_state, uint8_t *curr_state)
 {
     uint16_t light_sensitiv = analogRead(A5);
     if (uint16_t(analogRead(A4)) > light_sensitiv)
     {
-        for (int i = 0; i < 3; i++)
-            digitalWrite(LightPin[i], 0x1);
+        (*curr_state) = 1;
+        if ((*prev_state) != (*curr_state))
+        {
+            for (int i = 0; i < 3; i++)
+                digitalWrite(LightPin[i], 0x1);
+            Serial.println("It's a night!");
+        }
     }
     else
     {
-        for (int i = 0; i < 3; i++)
-            digitalWrite(LightPin[i], 0x0);
+        (*curr_state) = 0;
+        if ((*prev_state) != (*curr_state))
+        {
+            for (int i = 0; i < 3; i++)
+                digitalWrite(LightPin[i], 0x0);
+            Serial.println("It's a day!");
+        }
     }
+    (*prev_state) = (*curr_state);
 }
 /////////////////////////////////////////////////////////////////////////////////
 void setup()
 {
     Light_init();
+    UART_init();
 }
 
 void loop()
 {
-    NightLight_App();
+    NightLight_App(&prev_state, &curr_state);
 }

@@ -1,4 +1,4 @@
-c:\Users\Patryk\Desktop\App\Arduino\ XH-Conector_Tester\build\core\HardwareSerial0.cpp.o: \
+c:\Users\Patryk\Desktop\App\Skills_Show\build\core\HardwareSerial0.cpp.o: \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\HardwareSerial0.cpp \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\binary.h \

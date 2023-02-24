@@ -180,27 +180,40 @@ void battery_status_LED_ladder()
 
 /////////////////////////////WORKING_PROJECTS////////////////////////////////////
 ///*Light which turn on when it's come night (with potentiometer calibration)*///
-void NightLight_App()
+uint8_t prev_state = 0, curr_state = 0;
+void NightLight_App(uint8_t *prev_state, uint8_t *curr_state)
 {
     uint16_t light_sensitiv = analogRead(A5);
     if (uint16_t(analogRead(A4)) > light_sensitiv)
     {
-        for (int i = 0; i < LightNumber; i++)
-            digitalWrite(LightPin[i], HIGH);
+        (*curr_state) = 1;
+        if ((*prev_state) != (*curr_state))
+        {
+            for (int i = 0; i < LightNumber; i++)
+                digitalWrite(LightPin[i], HIGH);
+            Serial.println("It's a night!");
+        }
     }
     else
     {
-        for (int i = 0; i < LightNumber; i++)
-            digitalWrite(LightPin[i], LOW);
+        (*curr_state) = 0;
+        if ((*prev_state) != (*curr_state))
+        {
+            for (int i = 0; i < LightNumber; i++)
+                digitalWrite(LightPin[i], LOW);
+            Serial.println("It's a day!");
+        }
     }
+    (*prev_state) = (*curr_state);
 }
 /////////////////////////////////////////////////////////////////////////////////
 void setup()
 {
     Light_init();
+    UART_init();
 }
 
 void loop()
 {
-    NightLight_App();
+    NightLight_App(&prev_state, &curr_state);
 }
