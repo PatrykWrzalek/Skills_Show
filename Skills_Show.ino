@@ -8,6 +8,15 @@
 uint8_t LightPin[LightNumber], ButtonPin[ButtonNumber];
 uint8_t(*GreenLightStreet), (*YellowLightStreet), (*RedLightStreet);
 
+void Light_init()
+{
+    for (uint8_t i = 0; i < LightNumber; i++)
+    {
+        LightPin[i] = i + LightStartsFromPin;
+        pinMode(LightPin[i], OUTPUT);
+        digitalWrite(LightPin[i], LOW);
+    }
+}
 void init_LED_ladder() // Initialization LED_ladder programs
 {
     pinMode(LED_BUILTIN, OUTPUT);
@@ -16,12 +25,7 @@ void init_LED_ladder() // Initialization LED_ladder programs
         ButtonPin[i] = i + ButtonStartsFromPin;
         pinMode(ButtonPin[i], INPUT_PULLUP);
     }
-    for (uint8_t i = 0; i < LightNumber; i++)
-    {
-        LightPin[i] = i + LightStartsFromPin;
-        pinMode(LightPin[i], OUTPUT);
-        digitalWrite(LightPin[i], LOW);
-    }
+    Light_init();
 }
 void LED_3ladder_first_app() // First function
 {
@@ -66,8 +70,8 @@ void streetlight_app() // Streetlight_app (street lights control)
 {
 }
 
-////////////////////////////////////////////////////////////////////
-////*Window alarm application with the ability to arm the alarm*////
+/////////////////////////////////////////////////////////////////////////////////
+//////////*Window alarm application with the ability to arm the alarm*///////////
 uint8_t(*GreenLightWindow), (*RedLightWindow);
 String read_data = "";
 String user_login = "admin";
@@ -131,17 +135,12 @@ void window_alarm()
         }
     }
 }
-////////////////////////////////////////////////////////////////////
-////*Flashing application depending on the potentiometer turning*///
+/////////////////////////////////////////////////////////////////////////////////
+//////////*Flashing application depending on the potentiometer turning*//////////
 void voltage_mesure_init()
 {
     UART_init();
-    for (uint8_t i = 0; i < LightNumber; i++)
-    {
-        LightPin[i] = i + LightStartsFromPin;
-        pinMode(LightPin[i], OUTPUT);
-        digitalWrite(LightPin[i], LOW);
-    }
+    Light_init();
 }
 void voltage_mesure()
 {
@@ -178,14 +177,30 @@ void battery_status_LED_ladder()
         break;
     }
 }
-////////////////////////////////////////////////////////////////////
 
+/////////////////////////////WORKING_PROJECTS////////////////////////////////////
+///*Light which turn on when it's come night (with potentiometer calibration)*///
+void NightLight_App()
+{
+    uint16_t light_sensitiv = analogRead(A5);
+    if (uint16_t(analogRead(A4)) > light_sensitiv)
+    {
+        for (int i = 0; i < LightNumber; i++)
+            digitalWrite(LightPin[i], HIGH);
+    }
+    else
+    {
+        for (int i = 0; i < LightNumber; i++)
+            digitalWrite(LightPin[i], LOW);
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////
 void setup()
 {
-    voltage_mesure_init();
+    Light_init();
 }
 
 void loop()
 {
-    battery_status_LED_ladder();
+    NightLight_App();
 }
