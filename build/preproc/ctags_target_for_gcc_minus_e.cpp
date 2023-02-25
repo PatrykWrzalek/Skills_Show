@@ -178,7 +178,21 @@ void battery_status_LED_ladder()
         break;
     }
 }
-
+void walking_battery_status_LED_ladder()
+{
+    uint16_t mesure_data = 0, scale_value = 0;
+    mesure_data = analogRead(A5);
+    scale_value = map(mesure_data, 0, 1023, 1, (3 + 1));
+    if (scale_value != 1)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            digitalWrite(LightPin[i], scale_value >= i + 2);
+        }
+    }
+    else
+        digitalWrite(LightPin[0], 0x0);
+}
 /////////////////////////////WORKING_PROJECTS////////////////////////////////////
 ///*Light which turn on when it's come night (with potentiometer calibration)*///
 uint8_t prev_state = 0, curr_state = 0;
@@ -206,6 +220,49 @@ void NightLight_App(uint8_t *prev_state, uint8_t *curr_state)
         }
     }
     (*prev_state) = (*curr_state);
+}
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////*Buzzer song test*//////////////////////////////////
+void buzzer_test_init()
+{
+    pinMode(13, 0x1);
+    digitalWrite(13, 0x0);
+}
+void buzzer_test()
+{
+    tiu_tiu();
+    fast_piupiu();
+    tiu_tiu();
+    tiu_tiu();
+    fast_bibibi();
+    fast_piupiu();
+    fast_piupiu();
+    fast_piupiu();
+    tiu_tiu();
+    tiu_tiu();
+    tiu_tiu();
+    tiu_tiu();
+}
+void fast_bibibi()
+{
+    digitalWrite(13, 0x1);
+    delay(400);
+    digitalWrite(13, 0x0);
+    delay(100);
+}
+void fast_piupiu()
+{
+    digitalWrite(13, 0x1);
+    delay(200);
+    digitalWrite(13, 0x0);
+    delay(300);
+}
+void tiu_tiu()
+{
+    digitalWrite(13, 0x1);
+    delay(100);
+    digitalWrite(13, 0x0);
+    delay(900);
 }
 /////////////////////////////////////////////////////////////////////////////////
 void setup()
