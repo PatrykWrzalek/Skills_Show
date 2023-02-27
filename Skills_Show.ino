@@ -1,5 +1,6 @@
 /*Some of this projects are not finished,*/
 /*  but in short future it will be :D    */
+#include <Servo.h>
 #define LightNumber 3
 #define ButtonNumber 1
 #define LightStartsFromPin 5
@@ -264,13 +265,48 @@ void tiu_tiu()
     delay(900);
 }
 /////////////////////////////////////////////////////////////////////////////////
+Servo serwomechanizm;
+int change = 10;
+int pos = 0;
+void servo_move_init()
+{
+    UART_init();
+    serwomechanizm.attach(10); // Servo.h supports only two pins: 9 and 10
+}
+void servo_move(int pos)
+{
+    for (pos = 0; pos < 180; pos = pos + change)
+    {
+        serwomechanizm.write(pos);
+        Serial.println(String(pos));
+        delay(500);
+    }
+}
+void PWM_LED_init()
+{
+    UART_init();
+    pinMode(11, OUTPUT);
+    digitalWrite(11, LOW);
+}
+void PWM_LED()
+{
+    for (int i = 0; i < 255; i = i + 5)
+    {
+        analogWrite(11, i);
+        Serial.println(String(i));
+        delay(500);
+    }
+}
+
 void setup()
 {
-    Light_init();
-    UART_init();
+    // Light_init();
+    // UART_init();
+    servo_move_init();
 }
 
 void loop()
 {
-    NightLight_App(&prev_state, &curr_state);
+    // NightLight_App(&prev_state, &curr_state);
+    servo_move(pos);
 }

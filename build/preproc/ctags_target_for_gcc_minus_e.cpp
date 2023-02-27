@@ -1,6 +1,7 @@
 # 1 "c:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino"
 /*Some of this projects are not finished,*/
 /*  but in short future it will be :D    */
+# 4 "c:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino" 2
 
 
 
@@ -265,13 +266,48 @@ void tiu_tiu()
     delay(900);
 }
 /////////////////////////////////////////////////////////////////////////////////
+Servo serwomechanizm;
+int change = 6;
+int pos = 0;
+void servo_move_init()
+{
+    UART_init();
+    serwomechanizm.attach(11);
+}
+void servo_move(int pos)
+{
+    for (pos = 0; pos < 180; pos = pos + change)
+    {
+        serwomechanizm.write(pos);
+        Serial.println(String(pos));
+        delay(500);
+    }
+}
+void PWM_LED_init()
+{
+    UART_init();
+    pinMode(11, 0x1);
+    digitalWrite(11, 0x0);
+}
+void PWM_LED()
+{
+    for (int i = 0; i < 255; i = i + 5)
+    {
+        analogWrite(11, i);
+        Serial.println(String(i));
+        delay(500);
+    }
+}
+
 void setup()
 {
-    Light_init();
-    UART_init();
+    // Light_init();
+    // UART_init();
+    servo_move_init();
 }
 
 void loop()
 {
-    NightLight_App(&prev_state, &curr_state);
+    // NightLight_App(&prev_state, &curr_state);
+    servo_move(pos);
 }
