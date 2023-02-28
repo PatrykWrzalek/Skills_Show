@@ -81,7 +81,7 @@ String user_login = "admin";
 void UART_init() // Initialization UART
 {
     Serial.begin(115200);
-    Serial.println("Hello Unknown :D");
+    Serial.println("\e[1mHello Unknown :D\e[m");
 }
 void windowlight_init() // Assigning meaning to the is_window_open
 {
@@ -270,21 +270,32 @@ Servo serwomechanizm;
 int change = 10;
 int poten_pos = 0;
 int prev_poten_pos = 0;
-void servo_move_init()
+void servo_move_init(int *poten_pos)
 {
     UART_init();
-    serwomechanizm.attach(10); // Servo.h supports only two pins: 9 and 10
+    // serwomechanizm.attach(10); // Servo.h supports only two pins: 9 and 10
+    Serial.print("Actual position of servo is: " + String(*poten_pos));
 }
 void poten_servo_move(int *poten_pos, int *prev_poten_pos) // Function moving servo by potentiometer
 {
     *poten_pos = map(analogRead(A5), 0, 1023, 0, 180); // Read potentiometer position and mapping it to interval 0-180
     if (*prev_poten_pos != *poten_pos)
     {
-        serwomechanizm.write(*poten_pos);
-        Serial.println("Actual position of servo is:" + String(*poten_pos));
+        clear_word(String(*prev_poten_pos));
+        // serwomechanizm.write(*poten_pos);
+        Serial.print(String(*poten_pos));
+        *prev_poten_pos = *poten_pos;
     }
-    *prev_poten_pos = *poten_pos;
     delay(1000); // One second delay to change
+}
+void clear_word(String word)
+{
+    for (int i = 1; i <= word.length(); i++)
+        Serial.print("\b");
+    for (int i = 1; i <= word.length(); i++)
+        Serial.print(" ");
+    for (int i = 1; i <= word.length(); i++)
+        Serial.print("\b");
 }
 void PWM_LED_init()
 {
@@ -306,7 +317,7 @@ void setup()
 {
     // Light_init();
     // UART_init();
-    servo_move_init();
+    servo_move_init(&poten_pos);
 }
 
 void loop()
