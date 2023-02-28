@@ -1,12 +1,12 @@
-c:\Users\Patryk\Desktop\App\Skills_Show\build\core\CDC.cpp.o: \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\CDC.cpp \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\USBAPI.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\binary.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\WCharacter.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\WString.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\HardwareSerial.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\Stream.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\Print.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\Printable.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h
+C:\Users\Patryk\Desktop\App\Skills_Show\build\core\CDC.cpp.o: \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\CDC.cpp \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\USBAPI.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Arduino.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\binary.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WCharacter.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WString.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Stream.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Print.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Printable.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\variants\standard/pins_arduino.h

@@ -1,6 +1,6 @@
-c:\Users\Patryk\Desktop\App\Skills_Show\build\core\wiring.c.o: \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\wiring.c \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\wiring_private.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino\binary.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h
+C:\Users\Patryk\Desktop\App\Skills_Show\build\core\wiring.c.o: \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring.c \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_private.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Arduino.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\binary.h \
+ C:\Users\Patryk\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\variants\standard/pins_arduino.h

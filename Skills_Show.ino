@@ -267,20 +267,23 @@ void tiu_tiu()
 /////////////////////////////////////////////////////////////////////////////////
 Servo serwomechanizm;
 int change = 10;
-int pos = 0;
+int poten_pos = 0;
+int prev_poten_pos = 0;
 void servo_move_init()
 {
     UART_init();
     serwomechanizm.attach(10); // Servo.h supports only two pins: 9 and 10
 }
-void servo_move(int pos)
+void poten_servo_move(int *poten_pos, int *prev_poten_pos) // Function moving servo by potentiometer
 {
-    for (pos = 0; pos < 180; pos = pos + change)
+    *poten_pos = map(analogRead(A5), 0, 1023, 0, 180); // Read potentiometer position and mapping it to interval 0-180
+    if (*prev_poten_pos != *poten_pos)
     {
-        serwomechanizm.write(pos);
-        Serial.println(String(pos));
-        delay(500);
+        serwomechanizm.write(*poten_pos);
+        Serial.println("Actual position of servo is:" + String(*poten_pos));
     }
+    *prev_poten_pos = *poten_pos;
+    delay(1000); // One second delay to change
 }
 void PWM_LED_init()
 {
@@ -308,5 +311,5 @@ void setup()
 void loop()
 {
     // NightLight_App(&prev_state, &curr_state);
-    servo_move(pos);
+    poten_servo_move(&poten_pos, &prev_poten_pos);
 }
