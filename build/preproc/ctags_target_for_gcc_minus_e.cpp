@@ -7,6 +7,7 @@
 
 
 
+
 uint8_t LightPin[3], ButtonPin[1];
 uint8_t(*GreenLightStreet), (*YellowLightStreet), (*RedLightStreet);
 
@@ -72,6 +73,29 @@ void streetlight_app() // Streetlight_app (street lights control)
 {
 }
 
+void register_blink_board_LED()
+{
+    
+# 77 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino" 3
+   (*(volatile uint8_t *)((0x04) + 0x20)) 
+# 77 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino"
+        = 0b00100000;
+    while (1)
+    {
+        
+# 80 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino" 3
+       (*(volatile uint8_t *)((0x05) + 0x20)) 
+# 80 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino"
+             = 0b00100000;
+        _delay_ms(500);
+        
+# 82 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino" 3
+       (*(volatile uint8_t *)((0x05) + 0x20)) 
+# 82 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Skills_Show.ino"
+             = 0b00000000;
+        _delay_ms(500);
+    }
+}
 /////////////////////////////////////////////////////////////////////////////////
 //////////*Window alarm application with the ability to arm the alarm*///////////
 uint8_t(*GreenLightWindow), (*RedLightWindow);
@@ -266,6 +290,7 @@ void tiu_tiu()
     delay(900);
 }
 /////////////////////////////////////////////////////////////////////////////////
+////////////////////*Servo motor control by potentiometer*///////////////////////
 Servo serwomechanizm;
 int change = 10;
 int poten_pos = 0;
@@ -312,16 +337,18 @@ void PWM_LED()
         delay(500);
     }
 }
+/////////////////////////////////////////////////////////////////////////////////
 
 void setup()
 {
     // Light_init();
     // UART_init();
-    servo_move_init(&poten_pos);
+    // servo_move_init(&poten_pos);
 }
 
 void loop()
 {
     // NightLight_App(&prev_state, &curr_state);
-    poten_servo_move(&poten_pos, &prev_poten_pos);
+    // poten_servo_move(&poten_pos, &prev_poten_pos);
+    register_blink_board_LED();
 }

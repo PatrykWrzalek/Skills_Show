@@ -1,6 +1,7 @@
 /*Some of this projects are not finished,*/
 /*  but in short future it will be :D    */
 #include <Servo.h>
+
 #define LightNumber 3
 #define ButtonNumber 1
 #define LightStartsFromPin 5
@@ -71,6 +72,17 @@ void streetlight_app() // Streetlight_app (street lights control)
 {
 }
 
+void register_blink_board_LED()
+{
+    DDRB = 0b00100000;
+    while (1)
+    {
+        PORTB = 0b00100000;
+        _delay_ms(500);
+        PORTB = 0b00000000;
+        _delay_ms(500);
+    }
+}
 /////////////////////////////////////////////////////////////////////////////////
 //////////*Window alarm application with the ability to arm the alarm*///////////
 uint8_t(*GreenLightWindow), (*RedLightWindow);
@@ -265,6 +277,7 @@ void tiu_tiu()
     delay(900);
 }
 /////////////////////////////////////////////////////////////////////////////////
+////////////////////*Servo motor control by potentiometer*///////////////////////
 Servo serwomechanizm;
 int change = 10;
 int poten_pos = 0;
@@ -311,16 +324,18 @@ void PWM_LED()
         delay(500);
     }
 }
+/////////////////////////////////////////////////////////////////////////////////
 
 void setup()
 {
     // Light_init();
     // UART_init();
-    servo_move_init(&poten_pos);
+    // servo_move_init(&poten_pos);
 }
 
 void loop()
 {
     // NightLight_App(&prev_state, &curr_state);
-    poten_servo_move(&poten_pos, &prev_poten_pos);
+    // poten_servo_move(&poten_pos, &prev_poten_pos);
+    register_blink_board_LED();
 }
