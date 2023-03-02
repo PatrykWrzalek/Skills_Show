@@ -352,3 +352,50 @@ void loop()
     // poten_servo_move(&poten_pos, &prev_poten_pos);
     register_blink_board_LED();
 }
+# 1 "C:\\Users\\Patryk\\Desktop\\App\\Skills_Show\\Registers.ino"
+// There was a registers program which do functions from Skills_Show for Arduino
+/*
+
+int main()
+
+{
+
+DDRD =0b00001100;   //Initialize PINs which we used from PORT D
+
+DDRB =0b00000001;   //Initialize PINs which we used from PORT D
+
+PORTB=1<<0;	//PULLUP INPUT to PIN0
+
+
+
+  while(1)
+
+  {
+
+    if(PINB&~(1<<3)) {PORTD=(1<<3)|PORTD;}
+
+    else blink_LED_PORTD(2, 500);
+
+  }
+
+
+
+}
+
+
+
+void blink_LED_PORTD(uint8_t PIN, uint16_t time)    //Blinking LED's which are conected to PINs from PORT D
+
+{
+
+    PORTD=(1<<PIN)|PORTD;
+
+    _delay_ms(time+1);
+
+    PORTD=~(1<<PIN)&PORTD;
+
+    _delay_ms(time+1);
+
+}
+
+*/
