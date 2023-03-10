@@ -362,9 +362,9 @@ int main()
 
 DDRD =0b00001100;   //Initialize PINs which we used from PORT D
 
-DDRB =0b00000001;   //Initialize PINs which we used from PORT D
+DDRB =0b00000001;   //Initialize PINs which we used from PORT B
 
-PORTB=1<<0;	//PULLUP INPUT to PIN0
+PORTB=1<<0;	        //Enable internal pullup resistor to INPUT PIN0
 
 
 
@@ -372,7 +372,7 @@ PORTB=1<<0;	//PULLUP INPUT to PIN0
 
   {
 
-    if(PINB&~(1<<3)) {PORTD=(1<<3)|PORTD;}
+    if(PINB&(~(1<<3))) {PORTD=(1<<3)|PORTD;}
 
     else blink_LED_PORTD(2, 500);
 
